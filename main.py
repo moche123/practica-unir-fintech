@@ -18,15 +18,22 @@ def sort_list(items, ascending=True):
 
 
 def remove_duplicates_from_list(items):
-    return list(set(items))
+    return list(dict.fromkeys(items))
 
 
 if __name__ == "__main__":
     filename = DEFAULT_FILENAME
     remove_duplicates = DEFAULT_DUPLICATES
     if len(sys.argv) == 3:
-        filename = sys.argv[1]
-        remove_duplicates = sys.argv[2].lower() == "yes"
+      filename = sys.argv[1]
+
+      duplicate_option = sys.argv[2].lower()
+
+    if duplicate_option not in ["yes", "no"]:
+        print("El segundo argumento debe ser 'yes' o 'no'")
+        sys.exit(1)
+
+    remove_duplicates = duplicate_option == "yes"
     else:
         print("Se debe indicar el fichero como primer argumento")
         print("El segundo argumento indica si se quieren eliminar duplicados")
